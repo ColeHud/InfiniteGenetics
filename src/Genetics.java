@@ -263,8 +263,20 @@ public class Genetics
 		String returnString = "";
 		for(int i = 0; i < p1.length() && i < p2.length(); i++)
 		{
-			returnString += (p1.charAt(i) + "");
-			returnString += (p2.charAt(i) + "");
+			String one = p1.charAt(i) + "";
+			String two = p2.charAt(i) + "";
+			
+			if(one.compareTo(two) < 0)
+			{
+				returnString += (p1.charAt(i) + "");
+				returnString += (p2.charAt(i) + "");
+			}
+			else
+			{
+				returnString += (p2.charAt(i) + "");
+				returnString += (p1.charAt(i) + "");
+			}
+			
 		}
 		
 		return returnString;
@@ -280,6 +292,7 @@ public class Genetics
 				System.out.print(s + " ");
 			}
 			System.out.println();
+			
 		}
 	}
 
