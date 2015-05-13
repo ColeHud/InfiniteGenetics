@@ -1,13 +1,15 @@
+import java.util.ArrayList;
+
 
 public class GeneticsTester 
 {
 	public static void main(String[] args)
 	{
 		//create variables
-		Genetics genetics = new Genetics("FfGgXxCC", "FFgg");
+		Genetics genetics = new Genetics("FfGgXxCCZz", "FFgg");
 		genetics.convertParent1StringToArray();
 		
-		String[] array = genetics.combinationsOne();
+		ArrayList<String> array = genetics.newCombosOne();
 		
 		for(String string : array)
 		{
