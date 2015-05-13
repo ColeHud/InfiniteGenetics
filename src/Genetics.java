@@ -8,8 +8,8 @@ public class Genetics
 	private String parent2;
 	public String[][] parentOne;
 	public String[][] parentTwo;
-	public String[] combinationsOne;
-	public String[] combinationsTwo;
+	public ArrayList<String> combinationsOne;
+	public ArrayList<String> combinationsTwo;
 	private String[][] results;
 
 	//getters
@@ -172,7 +172,7 @@ public class Genetics
 		int possibleCombos = (int)Math.pow(2, parentOne.length);
 		ArrayList<String> returnArray = new ArrayList<String>(possibleCombos);
 
-		
+
 		//find the combos of the first 2 terms
 		for(String s : parentOne[0])
 		{
@@ -181,17 +181,46 @@ public class Genetics
 				returnArray.add((s+r));
 			}
 		}
-		
+
 		//doubleList(returnArray, parentOne[2]);
-		
+
 		for(int i = 2; i < parentOne.length; i++)
 		{
 			doubleList(returnArray, parentOne[i]);
 		}
-		
+
+		combinationsOne = returnArray;
 		return returnArray;
 	}
-	
+
+	//new combos
+	public ArrayList<String> newCombosTwo()
+	{
+		//create an array of possible combinations equal to 2^#ofGenes
+		int possibleCombos = (int)Math.pow(2, parentTwo.length);
+		ArrayList<String> returnArray = new ArrayList<String>(possibleCombos);
+
+
+		//find the combos of the first 2 terms
+		for(String s : parentTwo[0])
+		{
+			for(String r : parentTwo[1])
+			{
+				returnArray.add((s+r));
+			}
+		}
+
+		//doubleList(returnArray, parentOne[2]);
+
+		for(int i = 2; i < parentTwo.length; i++)
+		{
+			doubleList(returnArray, parentTwo[i]);
+		}
+
+		combinationsTwo = returnArray;
+		return returnArray;
+	}
+
 	//double
 	public static void doubleList(ArrayList<String> list, String[] twoAlleles)
 	{
@@ -202,7 +231,7 @@ public class Genetics
 			String s = list.get(i);
 			list.add(s + twoAlleles[1]);
 		}
-		
+
 		//and half to be of the other allele
 		for(int i = 0; i < list.size() / 2; i++)
 		{
@@ -210,5 +239,48 @@ public class Genetics
 		}
 	}
 
+	//combine the two parents to find all possible outcomes
+	public void results()
+	{
+		//give the results array dimension
+		results = new String[combinationsTwo.size()][combinationsOne.size()];
+		
+		//loop over parent 2
+		for(int y = 0; y < combinationsTwo.size(); y++)
+		{
+			for(int x = 0; x < combinationsOne.size(); x++)
+			{
+				String parent1 = combinationsOne.get(x);
+				String parent2 = combinationsTwo.get(y);
+				results[y][x] = combineSingles(parent1, parent2);
+			}
+		}
+	}
+	
+	//combine two strings of single alleles
+	public static String combineSingles(String p1, String p2)
+	{
+		String returnString = "";
+		for(int i = 0; i < p1.length() && i < p2.length(); i++)
+		{
+			returnString += (p1.charAt(i) + "");
+			returnString += (p2.charAt(i) + "");
+		}
+		
+		return returnString;
+	}
+
+	//print the results
+	public void printResults()
+	{
+		for(String[] array : results)
+		{
+			for(String s : array)
+			{
+				System.out.print(s + " ");
+			}
+			System.out.println();
+		}
+	}
 
 }

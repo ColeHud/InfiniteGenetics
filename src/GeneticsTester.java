@@ -6,15 +6,18 @@ public class GeneticsTester
 	public static void main(String[] args)
 	{
 		//create variables
-		Genetics genetics = new Genetics("FfGgXxCCZz", "FFgg");
+		Genetics genetics = new Genetics("FfGgXxRr", "FFggXXrr");
 		genetics.convertParent1StringToArray();
+		genetics.convertParent2StringToArray();
+		genetics.newCombosOne();
+		genetics.newCombosTwo();
 		
-		ArrayList<String> array = genetics.newCombosOne();
+
+		//ArrayList<String> array = genetics.newCombosOne();
 		
-		for(String string : array)
-		{
-			System.out.println(string);
-		}
+		genetics.results();
+		genetics.printResults();
+		
 		
 		//get user input
 		
