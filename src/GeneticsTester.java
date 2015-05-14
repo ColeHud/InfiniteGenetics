@@ -64,9 +64,11 @@ public class GeneticsTester
 			genetics.results();
 
 			//print out
-			System.out.println();
 			genetics.printResults();
 			System.out.println();
+			
+			//percentages
+			genetics.uniqueChildren();
 
 			//check if the user wants to go again
 			System.out.print("Do you want to go again? (y/n): ");

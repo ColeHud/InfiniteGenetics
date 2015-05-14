@@ -12,6 +12,12 @@ public class Genetics
 	public ArrayList<String> combinationsOne;
 	public ArrayList<String> combinationsTwo;
 	private String[][] results;
+	public int numChildren;
+	
+	//percentages
+	private ArrayList<String> uniqueChildren;
+	public ArrayList<Integer> uniqueChildrenNumbers;
+	public ArrayList<Double> percentagesOfUniqueChildren;
 
 	//getters
 	public String getParent1()
@@ -363,5 +369,55 @@ public class Genetics
 		}
 	}
 	
+	//find the number of each possible outcome
+	public void uniqueChildren()
+	{
+		uniqueChildren = new ArrayList<String>();
+		uniqueChildrenNumbers = new ArrayList<Integer>();
+		percentagesOfUniqueChildren = new ArrayList<Double>();
+		
+		for(String[] array : results)
+		{
+			numChildren = combinationsOne.size() * combinationsTwo.size();
+			
+			for(String s : array)
+			{
+				if(!uniqueChildren.contains(s))
+				{
+					uniqueChildren.add(s);
+					uniqueChildrenNumbers.add(1);
+				}
+				else
+				{
+					int index = uniqueChildren.indexOf(s);
+					int number = uniqueChildrenNumbers.get(index);
+					number++;
+					uniqueChildrenNumbers.set(index, number);
+				}
+			}
+			
+		}
+		
+		//set the percentages
+		int total = uniqueChildrenNumbers.size();
+		percentagesOfUniqueChildren = new ArrayList<Double>();
+		
+		for(int num : uniqueChildrenNumbers)
+		{
+			double percentage = 100 * ((double)num / (double)numChildren);
+			percentagesOfUniqueChildren.add(percentage);
+		}
+		
+		//print
+		System.out.println();
+		System.out.println("Percentages: ");
+		
+		for(int i = 0; i < uniqueChildren.size(); i++)
+		{
+			String string = uniqueChildren.get(i) + " : " + percentagesOfUniqueChildren.get(i);
+			System.out.println(string);
+		}
+		
+	}
 
 }
